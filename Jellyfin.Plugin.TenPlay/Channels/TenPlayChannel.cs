@@ -36,7 +36,7 @@ public sealed class TenPlayChannel : IChannel, IRequiresMediaInfoCallback
     public string HomePageUrl => "https://10.com.au/";
 
     /// <inheritdoc />
-    public string DataVersion => "3";
+    public string DataVersion => "4";
 
     /// <inheritdoc />
     public ChannelParentalRating ParentalRating => ChannelParentalRating.GeneralAudience;
@@ -183,11 +183,51 @@ public sealed class TenPlayChannel : IChannel, IRequiresMediaInfoCallback
             }
 
             string label = title.GetString()!;
-            items.Add(CreateFolder("featured:" + EncodeId(label), label));
+            items.Add(CreateFeaturedFolder(label));
         }
 
         return items;
     }
+
+    private static ChannelItemInfo CreateFeaturedFolder(string name)
+    {
+        string assemblyDirectory = Path.GetDirectoryName(typeof(TenPlayChannel).Assembly.Location) ?? AppContext.BaseDirectory;
+        string tileDirectory = Path.Combine(assemblyDirectory, "Images", "FeaturedTiles");
+        string tileFileName = FeaturedTileFiles.TryGetValue(name.Trim(), out string? fileName)
+            ? fileName
+            : "featured-default.png";
+
+        return new ChannelItemInfo
+        {
+            Id = "featured:" + EncodeId(name),
+            Name = name,
+            Type = ChannelItemType.Folder,
+            FolderType = ChannelFolderType.Container,
+            ImageUrl = Path.Combine(tileDirectory, tileFileName),
+        };
+    }
+
+    private static readonly Dictionary<string, string> FeaturedTileFiles = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["All the Drama"] = "all-the-drama.png",
+        ["Animation Station"] = "animation-station.png",
+        ["Comic Relief"] = "comic-relief.png",
+        ["Deep Dive Docs"] = "deep-dive-docs.png",
+        ["Everyday Inspiration"] = "everyday-inspiration.png",
+        ["Fair Dinkum Funny"] = "fair-dinkum-funny.png",
+        ["From the Silver Screen"] = "from-the-silver-screen.png",
+        ["Is That Your Final Answer?"] = "is-that-your-final-answer.png",
+        ["Jamie's Kitchen"] = "jamies-kitchen.png",
+        ["Newly Arrived from the UK"] = "newly-arrived-from-the-uk.png",
+        ["One Mic, No Filter"] = "one-mic-no-filter.png",
+        ["Real Cases, Real Consequences"] = "real-cases-real-consequences.png",
+        ["Real People, Real Chaos"] = "real-people-real-chaos.png",
+        ["Recently Added"] = "recently-added.png",
+        ["Recommended For You"] = "recommended-for-you.png",
+        ["Ride the Korean Wave"] = "ride-the-korean-wave.png",
+        ["Royals Revealed"] = "royals-revealed.png",
+        ["Sitcom Central"] = "sitcom-central.png",
+    };
 
     private static async Task<List<ChannelItemInfo>> GetFeaturedItemsAsync(string selectedTitle, CancellationToken cancellationToken)
     {

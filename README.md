@@ -10,16 +10,17 @@ This is an early Jellyfin 12.4 plugin for browsing 10 Play using the provider's 
 4. The **Featured** collections open shows, seasons, and episode entries from 10 Play.
 5. Selecting an episode requests the provider's on-demand HLS session at playback time. Expired account tokens are refreshed using the saved refresh token.
 
-Version 0.1.14 exposes Featured and the provider's full Shows category menu, connecting both to seasons, episodes, and the on-demand stream resolver. Live TV and Extras are not connected yet. Playback requires a signed-in account and a working Jellyfin playback/transcoding setup. The expiry parser accepts integer, decimal and text token lifetimes.
+Version 0.1.15 exposes Featured and the provider's full Shows category menu, connecting both to seasons, episodes, and the on-demand stream resolver. Featured includes 18 title-matched blue category tiles, bundled with the plugin and linked to their matching collections. Live TV and Extras are not connected yet. Playback requires a signed-in account and a working Jellyfin playback/transcoding setup. The expiry parser accepts integer, decimal and text token lifetimes.
 
 ## Install and test
 
-1. Extract `Jellyfin.Plugin.TenPlay.dll` from `outputs/Jellyfin.Plugin.TenPlay-0.1.14-jellyfin12.4-test.zip` into a folder you create called 'TenPlay' in the JellyFin plugin directory, 
-2. Restart Jellyfin.
-3. In the Jellyfin dashboard, open **Plugins → 10 Play**.
-4. Select **Sign in to 10 Play**.
-5. Open `https://10.com.au/activate`, enter the displayed code, and approve the device in your own 10 Play account.
-6. Wait for Jellyfin to report that sign-in completed, then open the 10 Play channel.
+1. Create a folder called `TenPlay` in the Jellyfin plugin directory.
+2. Extract **all contents** of `outputs/Jellyfin.Plugin.TenPlay-0.1.15-jellyfin12.4-featured-tiles.zip` into that folder. Keep the `Images/FeaturedTiles` folder beside the DLL.
+3. Restart Jellyfin.
+4. In the Jellyfin dashboard, open **Plugins → 10 Play**.
+5. Select **Sign in to 10 Play**.
+6. Open `https://10.com.au/activate`, enter the displayed code, and approve the device in your own 10 Play account.
+7. Wait for Jellyfin to report that sign-in completed, then open the 10 Play channel.
 
 The provider tokens are held in Jellyfin's local plugin configuration. Treat the Jellyfin server and its configuration backups as sensitive.
 
@@ -30,4 +31,4 @@ Add this URL under **Dashboard → Plugins → Repositories**:
 
 https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/manifest.json
 
-The current catalogue entry is version 0.1.14.0 and targets Jellyfin 12.4.0.0. It is a test package. The updated logo is in the source folder, but this older ZIP predates that change; a later build will include the new logo.
+The current catalogue entry is version 0.1.15.0 and targets Jellyfin 12.4.0.0. It is a test package and includes the updated channel logo and Featured tiles.
