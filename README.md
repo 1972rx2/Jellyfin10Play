@@ -10,7 +10,7 @@ This is an early Jellyfin 12.4 plugin for browsing 10 Play using the provider's 
 4. The **Featured** collections open shows, seasons, and episode entries from 10 Play.
 5. Selecting an episode requests the provider's on-demand HLS session at playback time. Expired account tokens are refreshed using the saved refresh token.
 
-Version 0.1.14 exposes Featured and the provider's full Shows category menu, connecting both to seasons, episodes, and the on-demand stream resolver. Big Brother is listed under Shows → Reality in the verified catalogue. Live TV and Extras are not connected yet. Playback requires a signed-in account and a working Jellyfin playback/transcoding setup. The expiry parser accepts integer, decimal and text token lifetimes.
+Version 0.1.14 exposes Featured and the provider's full Shows category menu, connecting both to seasons, episodes, and the on-demand stream resolver. Live TV and Extras are not connected yet. Playback requires a signed-in account and a working Jellyfin playback/transcoding setup. The expiry parser accepts integer, decimal and text token lifetimes.
 
 ## Install and test
 
