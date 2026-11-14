@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>10 Play</title></head>
+<body>
+  <div id="TenPlayConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-checkbox,emby-button">
+    <div data-role="content"><div class="content-primary">
+      <h1>10 Play</h1>
+      <p>Playback requires your own 10 Play account. Sign in using the official device-code flow; your password is entered only on 10 Play.</p>
+      <p>This plugin does not alter, skip, or remove advertising. Playback follows the stream returned by 10 Play.</p>
+      <div class="inputContainer">
+        <button is="emby-button" type="button" class="raised button-submit block emby-button" id="signInButton"><span>Sign in to 10 Play</span></button>
+        <button is="emby-button" type="button" class="raised block emby-button" id="checkStatusButton"><span>Check sign-in status</span></button>
+        <div id="loginInstructions" class="fieldDescription" style="display:none"></div>
+        <div id="loginStatus" class="fieldDescription" style="display:none"></div>
+      </div>
+      <div class="checkboxContainer checkboxContainer-withDescription"><label class="emby-checkbox-label">
+        <input id="IncludeLiveTv" type="checkbox" is="emby-checkbox" /><span>Include live TV</span>
+      </label></div>
+      <button is="emby-button" type="button" class="raised button-submit block emby-button" id="saveButton"><span>Save</span></button>
+    </div></div>
+    <script>
+    (() => {
+      const page = document.querySelector('#TenPlayConfigPage');
+      const pluginId = '54de03a2-5a75-46e9-9d05-80d210ce3896';
+      let loginTimer;
+      let pollInFlight = false;
+      page.addEventListener('pagehide', () => clearInterval(loginTimer));
+      page.addEventListener('pageshow', () => ApiClient.getPluginConfiguration(pluginId).then(config => {
+        document.querySelector('#IncludeLiveTv').checked = config.IncludeLiveTv;
+      }).then(() => checkLoginStatus()));
+      document.querySelector('#saveButton').addEventListener('click', () => ApiClient.getPluginConfiguration(pluginId).then(config => {
+        config.IncludeLiveTv = document.querySelector('#IncludeLiveTv').checked;
+        return ApiClient.updatePluginConfiguration(pluginId, config);
+      }).then(Dashboard.processPluginConfigurationUpdateResult));
+
+      document.querySelector('#signInButton').addEventListener('click', async () => {
+        const instructions = document.querySelector('#loginInstructions');
+        const statusMessage = document.querySelector('#loginStatus');
+        clearInterval(loginTimer);
+        Dashboard.showLoadingMsg();
+        try {
+          const startResponse = await ApiClient.fetch({
+            type: 'POST',
+            url: ApiClient.getUrl('TenPlay/Auth/start')
+          });
+          if (typeof startResponse.ok === 'boolean' && !startResponse.ok) throw new Error('Could not create a device code.');
+          const start = typeof startResponse.json === 'function' ? await startResponse.json() : startResponse;
+          const code = start.code || start.Code;
+          const expiry = start.expiresAtUnixSeconds || start.ExpiresAtUnixSeconds;
+          const link = document.createElement('a');
+          link.href = 'https://10.com.au/activate';
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = 'https://10.com.au/activate';
+          instructions.replaceChildren('Open ', link, ' and enter code ', code, '. Waiting for approval…');
+          instructions.style.display = 'block';
+          statusMessage.textContent = '';
+          statusMessage.style.display = 'none';
+          const timer = loginTimer = setInterval(async () => {
+            if (pollInFlight) return;
+            if (Math.floor(Date.now() / 1000) >= expiry) {
+              clearInterval(timer);
+              statusMessage.textContent = 'The code expired. Select Sign in to create a new one.';
+              statusMessage.style.display = 'block';
+              return;
+            }
+            try {
+              pollInFlight = true;
+              const resultResponse = await ApiClient.fetch({
+                type: 'POST',
+                url: ApiClient.getUrl('TenPlay/Auth/complete'),
+                contentType: 'application/json',
+                data: JSON.stringify({ code: code, expiresAtUnixSeconds: expiry })
+              });
+              if (typeof resultResponse.ok === 'boolean' && !resultResponse.ok) throw new Error('Device login is not complete yet.');
+              const result = typeof resultResponse.json === 'function' ? await resultResponse.json() : resultResponse;
+              if (result.complete || result.Complete) {
+                clearInterval(timer);
+                statusMessage.textContent = '10 Play sign-in complete.';
+                statusMessage.style.display = 'block';
+                return;
+              }
+
+              const detail = result.detail || result.Detail;
+              if (detail) {
+                statusMessage.textContent = detail;
+                statusMessage.style.display = 'block';
+              }
+
+              if (await checkLoginStatus()) {
+                clearInterval(timer);
+              }
+            } catch (error) {
+              const httpStatus = error && error.status;
+              statusMessage.textContent = httpStatus
+                ? 'Jellyfin could not confirm sign-in (HTTP ' + httpStatus + '). Approval has not been confirmed.'
+                : 'Could not check sign-in. Approval has not been confirmed. Retrying…';
+              statusMessage.style.display = 'block';
+              console.error('10 Play device login polling failed', error);
+            } finally {
+              pollInFlight = false;
+            }
+          }, 5000);
+        } catch (error) {
+          statusMessage.textContent = 'Could not create a 10 Play device code. Check the Jellyfin server log and try again.';
+          statusMessage.style.display = 'block';
+          console.error('10 Play device login start failed', error);
+        } finally {
+          Dashboard.hideLoadingMsg();
+        }
+      });
+
+      document.querySelector('#checkStatusButton').addEventListener('click', () => checkLoginStatus(true));
+
+      async function checkLoginStatus(showPending) {
+        const instructions = document.querySelector('#loginInstructions');
+        const statusMessage = document.querySelector('#loginStatus');
+        try {
+          const response = await ApiClient.fetch({ url: ApiClient.getUrl('TenPlay/Auth/status') });
+          if (typeof response.ok === 'boolean' && !response.ok) throw new Error('Status request failed.');
+          const status = typeof response.json === 'function' ? await response.json() : response;
+          if (status.complete || status.Complete) {
+            statusMessage.textContent = '10 Play sign-in complete.';
+            statusMessage.style.display = 'block';
+            return true;
+          }
+          if (showPending) {
+            statusMessage.textContent = 'Jellyfin has not received the 10 Play session yet. Start sign-in again and wait for this status to change.';
+            statusMessage.style.display = 'block';
+          }
+        } catch (error) {
+          if (showPending) {
+            statusMessage.textContent = 'Jellyfin could not check the sign-in state. Restart Jellyfin after updating the plugin, then try again.';
+            statusMessage.style.display = 'block';
+          }
+          console.error('10 Play sign-in status check failed', error);
+        }
+        return false;
+      }
+    })();
+    </script>
+  </div>
+</body>
+</html>
