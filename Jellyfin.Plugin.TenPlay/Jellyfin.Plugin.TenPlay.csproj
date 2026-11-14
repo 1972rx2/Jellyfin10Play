@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Jellyfin.Plugin.TenPlay</RootNamespace>
-    <Version>0.1.15</Version>
-    <AssemblyVersion>0.1.15.0</AssemblyVersion>
-    <FileVersion>0.1.15.0</FileVersion>
-    <InformationalVersion>0.1.15-jellyfin12.4-featured-tiles</InformationalVersion>
+    <Version>0.1.16</Version>
+    <AssemblyVersion>0.1.16.0</AssemblyVersion>
+    <FileVersion>0.1.16.0</FileVersion>
+    <InformationalVersion>0.1.16-jellyfin12.4-featured-tiles</InformationalVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>

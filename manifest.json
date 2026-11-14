@@ -8,6 +8,14 @@
     "category": "Channels",
     "versions": [
       {
+        "version": "0.1.16.0",
+        "changelog": "Corrects current Featured category tile labels, standardizes tile text sizing, and includes the updated channel logo.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/outputs/Jellyfin.Plugin.TenPlay-0.1.16-jellyfin12.4-featured-tiles.zip",
+        "checksum": "4FC6B329438C7B5626A150CE0A4A669F",
+        "timestamp": "2026-11-14T10:28:38Z"
+      },
+      {
         "version": "0.1.15.0",
         "changelog": "Adds 18 Featured collection tiles, links tiles to their categories, and includes the updated channel logo.",
         "targetAbi": "12.4.0.0",
