@@ -14,12 +14,12 @@ Version 0.1.14 exposes Featured and the provider's full Shows category menu, con
 
 ## Install and test
 
-1. Extract `Jellyfin.Plugin.TenPlay.dll` from `outputs/Jellyfin.Plugin.TenPlay-0.1.14-jellyfin12.4-test.zip` into the existing `TenPlay` plugin directory, replacing the previous DLL. Preserve the plugin configuration so the saved sign-in remains available.
+1. Extract `Jellyfin.Plugin.TenPlay.dll` from `outputs/Jellyfin.Plugin.TenPlay-0.1.14-jellyfin12.4-test.zip` into a folder you create called 'TenPlay' in the JellyFin plugin directory, 
 2. Restart Jellyfin.
 3. In the Jellyfin dashboard, open **Plugins → 10 Play**.
 4. Select **Sign in to 10 Play**.
 5. Open `https://10.com.au/activate`, enter the displayed code, and approve the device in your own 10 Play account.
-6. Wait for Jellyfin to report that sign-in completed, then open the **10 Play** channel.
+6. Wait for Jellyfin to report that sign-in completed, then open the 10 Play channel.
 
 The provider tokens are held in Jellyfin's local plugin configuration. Treat the Jellyfin server and its configuration backups as sensitive.
 
