@@ -24,7 +24,10 @@ Version 0.1.14 exposes Featured and the provider's full Shows category menu, con
 The provider tokens are held in Jellyfin's local plugin configuration. Treat the Jellyfin server and its configuration backups as sensitive.
 
 This plugin is not affiliated with Network 10 or Jellyfin. It does not remove or bypass advertising; it will play only the stream the provider returns for the signed-in account.
+## Install from Jellyfin's Plugin Catalog
 
-## About Jellyfin's repository warning
+Add this URL under **Dashboard → Plugins → Repositories**:
 
-This is a manually installed test build, not a published plugin repository. Jellyfin may show **“An error occurred while getting the plugin details from the repository”** on its plugin-details page. That message only concerns repository metadata and does not stop the installed plugin from loading or its Settings page from working.
+https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/manifest.json
+
+The current catalogue entry is version 0.1.14.0 and targets Jellyfin 12.4.0.0. It is a test package. The updated logo is in the source folder, but this older ZIP predates that change; a later build will include the new logo.
