@@ -8,6 +8,14 @@
     "category": "Channels",
     "versions": [
       {
+        "version": "0.1.17.0",
+        "changelog": "Corrects the Other Worldly and Watch the Book, Read the Movie Featured tile labels.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/outputs/Jellyfin.Plugin.TenPlay-0.1.17-jellyfin12.4-featured-tiles.zip",
+        "checksum": "5D36D795C6E82C85ED8CC48F141A857B",
+        "timestamp": "2026-11-15T03:34:27Z"
+      },
+      {
         "version": "0.1.16.0",
         "changelog": "Corrects current Featured category tile labels, standardizes tile text sizing, and includes the updated channel logo.",
         "targetAbi": "12.4.0.0",

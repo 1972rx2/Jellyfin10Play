@@ -36,7 +36,7 @@ public sealed class TenPlayChannel : IChannel, IRequiresMediaInfoCallback
     public string HomePageUrl => "https://10.com.au/";
 
     /// <inheritdoc />
-    public string DataVersion => "5";
+    public string DataVersion => "6";
 
     /// <inheritdoc />
     public ChannelParentalRating ParentalRating => ChannelParentalRating.GeneralAudience;
@@ -193,17 +193,9 @@ public sealed class TenPlayChannel : IChannel, IRequiresMediaInfoCallback
     {
         string assemblyDirectory = Path.GetDirectoryName(typeof(TenPlayChannel).Assembly.Location) ?? AppContext.BaseDirectory;
         string tileDirectory = Path.Combine(assemblyDirectory, "Images", "FeaturedTiles");
-        string tileFileName;
-        if (name.StartsWith("Watch the Book, Read", StringComparison.OrdinalIgnoreCase))
-        {
-            tileFileName = "watch-the-book-read.png";
-        }
-        else
-        {
-            tileFileName = FeaturedTileFiles.TryGetValue(name.Trim(), out string? fileName)
-                ? fileName
-                : "featured-default.png";
-        }
+        string tileFileName = FeaturedTileFiles.TryGetValue(name.Trim(), out string? fileName)
+            ? fileName
+            : "featured-default.png";
 
         return new ChannelItemInfo
         {
@@ -236,9 +228,10 @@ public sealed class TenPlayChannel : IChannel, IRequiresMediaInfoCallback
         ["Royals Revealed"] = "royals-revealed.png",
         ["Sitcom Central"] = "sitcom-central.png",
         ["Soaps and Nostalgia"] = "soaps-and-nostalgia.png",
-        ["Strange and Otherworldly"] = "strange-and-otherworldly.png",
+        ["Strange and Other Worldly"] = "strange-and-other-worldly.png",
         ["Thrillers and Killers"] = "thrillers-and-killers.png",
         ["The Traitors"] = "the-traitors.png",
+        ["Watch the Book, Read the Movie"] = "watch-the-book-read-the-movie.png",
         ["Where to Next?"] = "where-to-next.png",
     };
 
