@@ -8,6 +8,14 @@
     "category": "Channels",
     "versions": [
       {
+        "version": "0.1.18.0",
+        "changelog": "Adds bundled Jellyfin plugin metadata with an explicit assembly list so Jellyfin can load the plugin after restart.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/outputs/Jellyfin.Plugin.TenPlay-0.1.18-jellyfin12.4-plugin-metadata.zip",
+        "checksum": "9A4BEA7B92B06621D11A78F110C536C3",
+        "timestamp": "2026-11-16T08:17:31Z"
+      },
+      {
         "version": "0.1.17.0",
         "changelog": "Corrects the Other Worldly and Watch the Book, Read the Movie Featured tile labels.",
         "targetAbi": "12.4.0.0",

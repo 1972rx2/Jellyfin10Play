@@ -10,12 +10,12 @@ This is an early Jellyfin 12.4 plugin for browsing 10 Play using the provider's 
 4. The **Featured** collections open shows, seasons, and episode entries from 10 Play.
 5. Selecting an episode requests the provider's on-demand HLS session at playback time. Expired account tokens are refreshed using the saved refresh token.
 
-Version 0.1.17 exposes Featured and the provider's full Shows category menu, connecting both to seasons, episodes, and the on-demand stream resolver. Featured includes 24 blue category tiles with consistent text sizing, bundled with the plugin and linked to their matching collections. Live TV and Extras are not connected yet. Playback requires a signed-in account and a working Jellyfin playback/transcoding setup. The expiry parser accepts integer, decimal and text token lifetimes.
+Version 0.1.18 exposes Featured and the provider's full Shows category menu, connecting both to seasons, episodes, and the on-demand stream resolver. Featured includes 24 blue category tiles with consistent text sizing, bundled with the plugin and linked to their matching collections. Live TV and Extras are not connected yet. Playback requires a signed-in account and a working Jellyfin playback/transcoding setup. The expiry parser accepts integer, decimal and text token lifetimes.
 
 ## Install and test
 
 1. Create a folder called `TenPlay` in the Jellyfin plugin directory.
-2. Extract **all contents** of `outputs/Jellyfin.Plugin.TenPlay-0.1.17-jellyfin12.4-featured-tiles.zip` into that folder. Keep the `Images/FeaturedTiles` folder beside the DLL.
+2. Extract **all contents** of `outputs/Jellyfin.Plugin.TenPlay-0.1.18-jellyfin12.4-plugin-metadata.zip` into that folder. Keep the `Images/FeaturedTiles` folder beside the DLL.
 3. Restart Jellyfin.
 4. In the Jellyfin dashboard, open **Plugins → 10 Play**.
 5. Select **Sign in to 10 Play**.
@@ -31,6 +31,6 @@ Add this URL under **Dashboard → Plugins → Repositories**:
 
 https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/manifest.json
 
-The current catalogue entry is version 0.1.17.0 and targets Jellyfin 12.4.0.0. It is a test package and includes the updated channel logo and Featured tiles.
+The current catalogue entry is version 0.1.18.0 and targets Jellyfin 12.4.0.0. It includes the updated channel logo, Featured tiles, and a bundled metadata file that explicitly identifies the plugin assembly Jellyfin should load.
 
 

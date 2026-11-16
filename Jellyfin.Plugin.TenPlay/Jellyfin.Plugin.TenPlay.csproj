@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Jellyfin.Plugin.TenPlay</RootNamespace>
-    <Version>0.1.17</Version>
-    <AssemblyVersion>0.1.17.0</AssemblyVersion>
-    <FileVersion>0.1.17.0</FileVersion>
-    <InformationalVersion>0.1.17-jellyfin12.4-featured-tiles</InformationalVersion>
+    <Version>0.1.18</Version>
+    <AssemblyVersion>0.1.18.0</AssemblyVersion>
+    <FileVersion>0.1.18.0</FileVersion>
+    <InformationalVersion>0.1.18-jellyfin12.4-plugin-metadata</InformationalVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>
@@ -26,4 +26,5 @@
     <EmbeddedResource Include="Images\\logo.png" />
     <None Update="Images\\FeaturedTiles\\*.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+  <ItemGroup><None Update="meta.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
 </Project>

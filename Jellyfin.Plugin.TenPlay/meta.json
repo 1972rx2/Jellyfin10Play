@@ -1,0 +1,15 @@
+{
+  "guid": "54de03a2-5a75-46e9-9d05-80d210ce3896",
+  "name": "10 Play",
+  "description": "Browse and play available 10 Play catch-up television in Jellyfin.",
+  "overview": "Australian catch-up TV from 10 Play. Sign in with a 10 Play account to browse Featured and Shows.",
+  "owner": "1972rx2",
+  "category": "Channels",
+  "version": "0.1.18.0",
+  "targetAbi": "12.4.0.0",
+  "status": "Active",
+  "autoUpdate": true,
+  "assemblies": [
+    "Jellyfin.Plugin.TenPlay.dll"
+  ]
+}
