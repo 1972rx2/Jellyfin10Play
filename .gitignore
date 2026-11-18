@@ -3,7 +3,7 @@
 .dotnet-tenplay/
 .nuget-tenplay/
 outputs/*
-!outputs/Jellyfin.Plugin.TenPlay-0.1.14-jellyfin12.4-test.zip
+!outputs/Jellyfin.Plugin.TenPlay-*.zip
 work/
 addon-assets-temp/
 template-reference/

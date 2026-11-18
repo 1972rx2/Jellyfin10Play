@@ -6,7 +6,16 @@
     "overview": "Australian catch-up TV from 10 Play. Sign in with a 10 Play account to browse Featured and Shows.",
     "owner": "1972rx2",
     "category": "Channels",
+    "imageUrl": "https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/Jellyfin.Plugin.TenPlay/Images/logo.png",
     "versions": [
+      {
+        "version": "0.1.19.0",
+        "changelog": "Adds the 10 Play logo to the plugin catalog card and settings page.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/1972rx2/Jellyfin10Play/main/outputs/Jellyfin.Plugin.TenPlay-0.1.19-jellyfin12.4-plugin-logo.zip",
+        "checksum": "162556FEAAA3D76162DEF99FCFE3EAF8",
+        "timestamp": "2026-11-18T02:20:46Z"
+      },
       {
         "version": "0.1.18.0",
         "changelog": "Adds bundled Jellyfin plugin metadata with an explicit assembly list so Jellyfin can load the plugin after restart.",

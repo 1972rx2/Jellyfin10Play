@@ -5,8 +5,9 @@
   "overview": "Australian catch-up TV from 10 Play. Sign in with a 10 Play account to browse Featured and Shows.",
   "owner": "1972rx2",
   "category": "Channels",
-  "version": "0.1.18.0",
+  "version": "0.1.19.0",
   "targetAbi": "12.4.0.0",
+  "imagePath": "logo.png",
   "status": "Active",
   "autoUpdate": true,
   "assemblies": [
